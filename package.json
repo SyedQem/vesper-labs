@@ -1,0 +1,9 @@
+{
+  "name": "vesper-labs",
+  "version": "0.1.0",
+  "description": "Vesper Labs — official website",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

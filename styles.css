@@ -173,6 +173,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
+    will-change: transform;
     transition: width 0.2s, height 0.2s;
 }
 
@@ -187,6 +188,7 @@ h1, h2, h3, h4, h5, h6, .logo {
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9998;
+    will-change: transform;
     transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s;
 }
 
