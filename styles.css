@@ -40,7 +40,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    * {
+        cursor: none !important;
+    }
 }
 
 html {
@@ -57,7 +62,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    cursor: none; /* Hide default cursor */
 }
 
 /* selection */
@@ -69,7 +73,6 @@ body {
 a {
     color: inherit;
     text-decoration: none;
-    cursor: none; /* override for custom cursor */
 }
 
 ul {
@@ -80,9 +83,9 @@ button {
     background: none;
     border: none;
     outline: none;
-    cursor: none; /* override */
     font-family: inherit;
     color: inherit;
+    cursor: pointer;
 }
 
 /* ==========================================================================
@@ -163,48 +166,60 @@ h1, h2, h3, h4, h5, h6, .logo {
 }
 
 /* Custom Cursor */
-.cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--clr-accent);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    will-change: transform;
-    transition: width 0.2s, height 0.2s;
-}
-
+.cursor-dot,
 .cursor-outline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--clr-border);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9998;
-    will-change: transform;
-    transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s;
+    display: none;
 }
 
-body.cursor-hover .cursor-dot {
-    width: 0px;
-    height: 0px;
-}
+@media (hover: hover) and (pointer: fine) {
+    .cursor-dot,
+    .cursor-outline {
+        display: block;
+    }
 
-body.cursor-hover .cursor-outline {
-    width: 60px;
-    height: 60px;
-    background-color: var(--clr-accent);
-    border-color: transparent;
-    mix-blend-mode: difference;
+    .cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--clr-accent);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        will-change: transform;
+        transition: width 0.2s, height 0.2s;
+    }
+
+    .cursor-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--clr-border);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9998;
+        will-change: transform;
+        transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s;
+    }
+
+    body.cursor-hover .cursor-dot {
+        width: 0px;
+        height: 0px;
+    }
+
+    body.cursor-hover .cursor-outline {
+        width: 60px;
+        height: 60px;
+        background-color: var(--clr-accent);
+        border-color: transparent;
+        mix-blend-mode: difference;
+    }
 }
 
 /* Header */
