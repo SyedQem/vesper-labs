@@ -7,6 +7,15 @@
     <title>Vesper Labs | Engineering Tomorrow</title>
     <meta name="description" content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design.">
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Vesper Labs | Engineering Tomorrow" />
+    <meta property="og:description" content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vesper-labs.vercel.app/" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⬛</text></svg>">
+
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +23,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -40,6 +52,10 @@
                 <a href="#contact"   class="nav-link magnetic" data-section="contact">Contact</a>
             </nav>
             <button class="nav-btn magnetic">Let's Talk</button>
+            <button class="menu-btn" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -48,7 +64,7 @@
         <section class="hero section" id="home">
             <canvas id="hero-canvas" aria-hidden="true"></canvas>
             <div class="hero-content">
-                <p class="hero-subtitle reveal-text">Shaping the future</p>
+                <p class="hero-subtitle reveal-opacity delay-1">Shaping the future</p>
                 <h1 class="hero-title">
                     <span class="line-wrap"><span class="line reveal-text delay-1">Pioneering</span></span>
                     <span class="line-wrap"><span class="line reveal-text delay-2">Digital</span></span>

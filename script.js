@@ -4,8 +4,6 @@
  *          scroll animations, matrix rain, sticky header, active nav
  */
 
-import { Analytics } from "@vercel/analytics/next"
-
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
@@ -65,6 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.transform = 'translate(0px, 0px)';
         });
     });
+
+    /* ==========================================================================
+       Mobile Menu Toggle
+       ========================================================================== */
+    const menuBtn = document.querySelector('.menu-btn');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            document.body.classList.toggle('nav-open');
+        });
+
+        // Close menu when clicking a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('nav-open');
+            });
+        });
+    }
 
     /* ==========================================================================
        Sticky Header — adds .scrolled class after 60px

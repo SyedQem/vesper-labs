@@ -142,6 +142,7 @@ h1, h2, h3, h4, h5, h6, .logo {
 .section {
     padding-top: var(--space-xl);
     padding-bottom: var(--space-xl);
+    scroll-margin-top: 100px;
 }
 
 /* ==========================================================================
@@ -230,13 +231,41 @@ body.cursor-hover .cursor-outline {
 }
 
 .nav-links {
-    display: none;
-    gap: var(--space-md);
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 3, 3, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.4s var(--ease-out-expo);
+}
+
+body.nav-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 @media (min-width: 768px) {
     .nav-links {
-        display: flex;
+        position: static;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        flex-direction: row;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        padding: 0;
+        gap: var(--space-md);
     }
 }
 
@@ -272,11 +301,54 @@ body.cursor-hover .cursor-outline {
     font-size: 0.9rem;
     font-weight: 500;
     transition: var(--transition-fast);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .nav-btn {
+        display: block;
+    }
 }
 
 .nav-btn:hover {
     background: var(--clr-text);
     color: var(--clr-bg);
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 48px;
+    height: 48px;
+    z-index: 100;
+    background: transparent;
+    border: none;
+    cursor: none;
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        display: none;
+    }
+}
+
+.menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--clr-text);
+    transition: transform 0.4s var(--ease-out-expo), background-color 0.4s;
+}
+
+body.nav-open .menu-btn span:first-child {
+    transform: translateY(4px) rotate(45deg);
+}
+
+body.nav-open .menu-btn span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
 }
 
 /* Buttons */
