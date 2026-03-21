@@ -4,6 +4,8 @@
  *          scroll animations, matrix rain, sticky header, active nav
  */
 
+import { Analytics } from "@vercel/analytics/next"
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
