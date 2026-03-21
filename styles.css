@@ -940,7 +940,7 @@ body.nav-open .menu-btn span:last-child {
     border-bottom: 1px solid transparent;
 }
 
-.header.scrolled {
+body:not(.nav-open) .header.scrolled {
     background-color: rgba(3, 3, 3, 0.75);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
