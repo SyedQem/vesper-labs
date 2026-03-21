@@ -40,6 +40,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none !important;
 }
 
 html {
@@ -302,7 +303,26 @@ body.cursor-hover .cursor-outline {
     justify-content: center;
     position: relative;
     padding: var(--padding-x);
+    overflow: hidden;
 }
+
+/* Matrix canvas — behind hero text */
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.28;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+
 
 .hero-subtitle {
     font-family: var(--font-heading);
@@ -622,3 +642,352 @@ body.cursor-hover .cursor-outline {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ==========================================================================
+   Team Page
+   ========================================================================== */
+
+.team-hero {
+    padding: calc(var(--space-xxl) + 4rem) var(--padding-x) var(--space-xl);
+}
+
+.team-hero-label {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--clr-text-muted);
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
+.team-hero-title {
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+}
+
+.team-section {
+    padding: var(--space-xl) var(--padding-x);
+    border-top: 1px solid var(--clr-border);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background-color: var(--clr-border);
+    border: 1px solid var(--clr-border);
+}
+
+@media (min-width: 640px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.team-card {
+    background: var(--clr-bg);
+    padding: var(--space-lg) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: background-color 0.4s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--clr-text);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s var(--ease-out-expo);
+    z-index: 0;
+}
+
+.team-card:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.team-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.team-card:hover .team-card-name,
+.team-card:hover .team-card-role,
+.team-card:hover .team-card-bio {
+    color: var(--clr-bg);
+}
+
+.team-card-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--clr-border);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-muted);
+    border: 1px solid var(--clr-border);
+    transition: border-color 0.4s;
+}
+
+.team-card:hover .team-card-avatar {
+    border-color: var(--clr-bg);
+    color: var(--clr-bg);
+}
+
+.team-card-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition: color 0.4s var(--ease-out-expo);
+}
+
+.team-card-role {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--clr-text-muted);
+    transition: color 0.4s var(--ease-out-expo);
+}
+
+.team-card-bio {
+    font-size: 1rem;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+    transition: color 0.4s var(--ease-out-expo);
+}
+
+/* active nav state for team page */
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Preloader
+   ========================================================================== */
+
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--clr-bg);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: opacity 0.6s var(--ease-out-expo), visibility 0.6s;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--clr-text);
+}
+
+.preloader-bar {
+    width: 120px;
+    height: 1px;
+    background: var(--clr-border);
+    overflow: hidden;
+}
+
+.preloader-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--clr-text);
+    animation: preloaderFill 0.9s var(--ease-out-expo) forwards;
+}
+
+@keyframes preloaderFill {
+    0%   { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* ==========================================================================
+   Header Scroll State
+   ========================================================================== */
+
+.header {
+    transition: background-color 0.4s var(--ease-out-expo),
+                backdrop-filter 0.4s var(--ease-out-expo),
+                border-bottom-color 0.4s var(--ease-out-expo);
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    background-color: rgba(3, 3, 3, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom-color: var(--clr-border);
+}
+
+/* ==========================================================================
+   Active Nav Section Highlight
+   ========================================================================== */
+
+.nav-link.section-active::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Team Inline Section (on index.html)
+   ========================================================================== */
+
+.team-inline .section-header {
+    margin-bottom: var(--space-lg);
+}
+
+.team-grid-inline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+    .team-grid-inline {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.team-card-inline {
+    border: 1px solid var(--clr-border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: border-color 0.4s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card-inline:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.team-card-inline-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.team-card-avatar-lg {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--clr-border);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-muted);
+    letter-spacing: 0.02em;
+    transition: border-color 0.4s, color 0.4s;
+}
+
+.team-card-inline:hover .team-card-avatar-lg {
+    border-color: var(--clr-text);
+    color: var(--clr-text);
+}
+
+.team-card-inline-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.team-card-inline-role {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--clr-text-muted);
+    margin-top: 0.4rem;
+}
+
+.team-card-inline-divider {
+    height: 1px;
+    background: var(--clr-border);
+    transition: background-color 0.4s;
+}
+
+.team-card-inline:hover .team-card-inline-divider {
+    background: rgba(255,255,255, 0.2);
+}
+
+.team-card-inline-bio {
+    font-size: 1.05rem;
+    color: var(--clr-text-muted);
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   Footer Availability Indicator
+   ========================================================================== */
+
+.footer-availability {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.availability-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    animation: availabilityPulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes availabilityPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    60%  { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.availability-text {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--clr-text-muted);
+}
+

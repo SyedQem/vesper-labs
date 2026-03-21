@@ -6,16 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vesper Labs | Engineering Tomorrow</title>
     <meta name="description" content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design.">
-    
+
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <span class="preloader-logo">vspr.</span>
+        <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+
     <!-- Noise Grain Overlay -->
     <div class="noise-overlay"></div>
 
@@ -24,13 +30,14 @@
     <div class="cursor-outline"></div>
 
     <!-- Header Navigation -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="nav-container">
             <a href="#" class="logo magnetic">vspr.</a>
             <nav class="nav-links">
-                <a href="#about" class="nav-link magnetic">About</a>
-                <a href="#expertise" class="nav-link magnetic">Expertise</a>
-                <a href="#contact" class="nav-link magnetic">Contact</a>
+                <a href="#about"     class="nav-link magnetic" data-section="about">About</a>
+                <a href="#expertise" class="nav-link magnetic" data-section="expertise">Expertise</a>
+                <a href="#team"      class="nav-link magnetic" data-section="team">Team</a>
+                <a href="#contact"   class="nav-link magnetic" data-section="contact">Contact</a>
             </nav>
             <button class="nav-btn magnetic">Let's Talk</button>
         </div>
@@ -39,6 +46,7 @@
     <main data-scroll-container>
         <!-- Hero Section -->
         <section class="hero section" id="home">
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
             <div class="hero-content">
                 <p class="hero-subtitle reveal-text">Shaping the future</p>
                 <h1 class="hero-title">
@@ -99,7 +107,30 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Team Section -->
+        <section class="team-inline section" id="team">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label-text">03 // The People</span>
+                    <h2 class="section-title reveal-text-scroll">The Team</h2>
+                </div>
+                <div class="team-grid-inline">
+                    <div class="team-card-inline reveal-text-scroll">
+                        <div class="team-card-inline-top">
+                            <div class="team-card-avatar-lg">QS</div>
+                            <div class="team-card-inline-meta">
+                                <h3 class="team-card-inline-name">Qurb E Muhammad Syed</h3>
+                                <span class="team-card-inline-role">Founder</span>
+                            </div>
+                        </div>
+                        <div class="team-card-inline-divider"></div>
+                        <p class="team-card-inline-bio">Driven by a conviction that the best digital experiences exist at the intersection of precision engineering and timeless design. Building Vesper Labs to prove it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Manifesto/Marquee -->
         <section class="marquee section">
             <div class="marquee-inner">
@@ -117,6 +148,10 @@
             <div class="footer-bottom">
                 <div class="footer-brand">
                     <span class="logo">Vesper Labs &copy; 2026</span>
+                </div>
+                <div class="footer-availability">
+                    <span class="availability-dot"></span>
+                    <span class="availability-text">Available for projects</span>
                 </div>
                 <div class="footer-socials">
                     <a href="#" class="social-link magnetic">Twitter</a>
