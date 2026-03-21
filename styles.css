@@ -260,7 +260,10 @@ h1, h2, h3, h4, h5, h6, .logo {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
-    transition: all 0.4s var(--ease-out-expo);
+    transition: opacity 0.4s var(--ease-out-expo),
+                visibility 0.4s,
+                transform 0.4s var(--ease-out-expo);
+    will-change: opacity, transform;
 }
 
 body.nav-open {
@@ -349,6 +352,9 @@ body.nav-open .nav-links {
     z-index: 100;
     background: transparent;
     border: none;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
     cursor: none;
 }
 
