@@ -185,6 +185,7 @@ h1, h2, h3, h4, h5, h6, .logo {
         height: 8px;
         background-color: var(--clr-accent);
         border-radius: 50%;
+        /* JS composes pointer position with this centering offset. */
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 9999;
@@ -201,6 +202,7 @@ h1, h2, h3, h4, h5, h6, .logo {
         height: 40px;
         border: 1px solid var(--clr-border);
         border-radius: 50%;
+        /* JS composes pointer position with this centering offset. */
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 9998;

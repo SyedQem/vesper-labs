@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         outlineX += (mouseX - outlineX) * 0.15;
         outlineY += (mouseY - outlineY) * 0.15;
 
-        dot.style.transform     = `translate(${dotX}px, ${dotY}px)`;
-        outline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+        dot.style.transform     = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+        outline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
         requestAnimationFrame(renderCursor);
     }
     renderCursor();
