@@ -23,33 +23,58 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const dot     = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let dotX = mouseX, dotY = mouseY;
-    let outlineX = mouseX, outlineY = mouseY;
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+    if (dot && outline) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let dotX = mouseX, dotY = mouseY;
+        let outlineX = mouseX, outlineY = mouseY;
+        const setCursorInactive = (isInactive) => {
+            document.body.classList.toggle('cursor-inactive', isInactive);
+        };
 
-    function renderCursor() {
-        dotX     += (mouseX - dotX)     * 0.5;
-        dotY     += (mouseY - dotY)     * 0.5;
-        outlineX += (mouseX - outlineX) * 0.15;
-        outlineY += (mouseY - outlineY) * 0.15;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            setCursorInactive(false);
+        });
 
-        dot.style.transform     = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
-        outline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-        requestAnimationFrame(renderCursor);
+        document.addEventListener('mouseleave', () => {
+            setCursorInactive(true);
+            document.body.classList.remove('cursor-hover');
+        });
+
+        document.addEventListener('mouseenter', () => setCursorInactive(false));
+        window.addEventListener('blur', () => setCursorInactive(true));
+        window.addEventListener('focus', () => setCursorInactive(false));
+        document.addEventListener('visibilitychange', () => {
+            setCursorInactive(document.hidden);
+            if (document.hidden) {
+                document.body.classList.remove('cursor-hover');
+            }
+        });
+
+        function renderCursor() {
+            dotX     += (mouseX - dotX)     * 0.5;
+            dotY     += (mouseY - dotY)     * 0.5;
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+
+            dot.style.transform     = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+            outline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(renderCursor);
+        }
+        renderCursor();
+
+        // Hover state on interactive elements
+        document.querySelectorAll('a, button, .hover-reveal').forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+                setCursorInactive(false);
+                document.body.classList.add('cursor-hover');
+            });
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
     }
-    renderCursor();
-
-    // Hover state on interactive elements
-    document.querySelectorAll('a, button, .hover-reveal').forEach((el) => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
 
     // Magnetic pull
     document.querySelectorAll('.magnetic').forEach(btn => {
