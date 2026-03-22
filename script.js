@@ -77,16 +77,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Magnetic pull
-    document.querySelectorAll('.magnetic').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width  / 2;
-            const y = e.clientY - rect.top  - rect.height / 2;
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    const magneticElements = document.querySelectorAll('.magnetic');
+    const resetMagneticOffset = (element) => {
+        element.style.setProperty('--magnetic-x', '0px');
+        element.style.setProperty('--magnetic-y', '0px');
+    };
+
+    magneticElements.forEach((element) => {
+        const magneticTarget = element.querySelector('.magnetic-inner');
+
+        if (!magneticTarget) return;
+
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            element.style.setProperty('--magnetic-x', `${x * 0.3}px`);
+            element.style.setProperty('--magnetic-y', `${y * 0.3}px`);
         });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0px, 0px)';
+
+        ['mouseleave', 'pointercancel', 'blur'].forEach((eventName) => {
+            element.addEventListener(eventName, () => resetMagneticOffset(element));
         });
+    });
+
+    ['scroll', 'blur'].forEach((eventName) => {
+        window.addEventListener(eventName, () => {
+            magneticElements.forEach(resetMagneticOffset);
+        }, { passive: true });
     });
 
     /* ==========================================================================
