@@ -345,6 +345,20 @@ body.nav-open .mobile-nav-overlay {
     }
 }
 
+
+.magnetic {
+    --magnetic-x: 0px;
+    --magnetic-y: 0px;
+}
+
+.magnetic-inner {
+    display: inline-block;
+    transform: translate(var(--magnetic-x), var(--magnetic-y));
+    transition: transform 0.2s ease;
+    will-change: transform;
+    pointer-events: none;
+}
+
 .nav-link {
     font-size: 0.9rem;
     font-weight: 500;
