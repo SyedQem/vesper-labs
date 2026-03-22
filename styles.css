@@ -56,6 +56,22 @@ body.custom-cursor-enabled [tabindex]:not([tabindex='-1']) {
     cursor: none !important;
 }
 
+body.custom-cursor-enabled,
+body.custom-cursor-enabled :not(input):not(textarea):not(select):not([contenteditable='true']) {
+    -webkit-user-select: none;
+    user-select: none;
+    caret-color: transparent;
+}
+
+body.custom-cursor-enabled input,
+body.custom-cursor-enabled textarea,
+body.custom-cursor-enabled select,
+body.custom-cursor-enabled [contenteditable='true'] {
+    -webkit-user-select: text;
+    user-select: text;
+    caret-color: auto;
+}
+
 @media (hover: hover) and (pointer: fine) {
     html {
         scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.08);
