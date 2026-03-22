@@ -42,22 +42,21 @@
     box-sizing: border-box;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    html,
-    body,
-    body *,
-    a,
-    button,
-    input,
-    select,
-    textarea,
-    summary,
-    label,
-    [role='button'],
-    [tabindex]:not([tabindex='-1']) {
-        cursor: none !important;
-    }
+body.custom-cursor-enabled,
+body.custom-cursor-enabled *,
+body.custom-cursor-enabled a,
+body.custom-cursor-enabled button,
+body.custom-cursor-enabled input,
+body.custom-cursor-enabled select,
+body.custom-cursor-enabled textarea,
+body.custom-cursor-enabled summary,
+body.custom-cursor-enabled label,
+body.custom-cursor-enabled [role='button'],
+body.custom-cursor-enabled [tabindex]:not([tabindex='-1']) {
+    cursor: none !important;
+}
 
+@media (hover: hover) and (pointer: fine) {
     html {
         scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.08);
         scrollbar-width: thin;
@@ -205,11 +204,12 @@ h1, h2, h3, h4, h5, h6, .logo {
     display: none;
 }
 
+body.custom-cursor-enabled .cursor-dot,
+body.custom-cursor-enabled .cursor-outline {
+    display: block;
+}
+
 @media (hover: hover) and (pointer: fine) {
-    .cursor-dot,
-    .cursor-outline {
-        display: block;
-    }
 
     .cursor-dot {
         position: fixed;

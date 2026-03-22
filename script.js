@@ -23,8 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const dot     = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
+    const finePointerMediaQuery = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
+    let cursorInitialized = false;
 
-    if (dot && outline) {
+    const syncCustomCursorCapability = () => {
+        const isEnabled = finePointerMediaQuery.matches;
+        document.body.classList.toggle('custom-cursor-enabled', isEnabled);
+        if (!isEnabled) {
+            document.body.classList.remove('cursor-hover', 'cursor-inactive');
+        }
+        return isEnabled;
+    };
+
+    const initializeCustomCursor = () => {
+        if (cursorInitialized || !dot || !outline || !syncCustomCursorCapability()) {
+            return;
+        }
+
+        cursorInitialized = true;
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let dotX = mouseX, dotY = mouseY;
@@ -33,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('cursor-inactive', isInactive);
         };
 
-        window.addEventListener('mousemove', (e) => {
+        window.addEventListener('pointermove', (e) => {
+            if (!finePointerMediaQuery.matches || e.pointerType === 'touch') {
+                return;
+            }
             mouseX = e.clientX;
             mouseY = e.clientY;
             setCursorInactive(false);
@@ -66,14 +85,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         renderCursor();
 
-        // Hover state on interactive elements
         document.querySelectorAll('a, button, .hover-reveal').forEach((el) => {
             el.addEventListener('mouseenter', () => {
+                if (!finePointerMediaQuery.matches) {
+                    return;
+                }
                 setCursorInactive(false);
                 document.body.classList.add('cursor-hover');
             });
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
+    };
+
+    syncCustomCursorCapability();
+    initializeCustomCursor();
+    const handleFinePointerChange = () => {
+        syncCustomCursorCapability();
+        initializeCustomCursor();
+    };
+    if (typeof finePointerMediaQuery.addEventListener === 'function') {
+        finePointerMediaQuery.addEventListener('change', handleFinePointerChange);
+    } else if (typeof finePointerMediaQuery.addListener === 'function') {
+        finePointerMediaQuery.addListener(handleFinePointerChange);
     }
 
     // Magnetic pull
