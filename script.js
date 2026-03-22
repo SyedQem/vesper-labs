@@ -68,15 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
        Mobile Menu Toggle
        ========================================================================== */
     const menuBtn = document.querySelector('.menu-btn');
-    if (menuBtn) {
+    const mobileNavOverlay = document.getElementById('mobile-nav');
+    const setMobileNavState = (isOpen) => {
+        document.body.classList.toggle('nav-open', isOpen);
+        if (menuBtn) {
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
+        }
+        if (mobileNavOverlay) {
+            mobileNavOverlay.setAttribute('aria-hidden', String(!isOpen));
+        }
+    };
+
+    if (menuBtn && mobileNavOverlay) {
         menuBtn.addEventListener('click', () => {
-            document.body.classList.toggle('nav-open');
+            const isOpen = !document.body.classList.contains('nav-open');
+            setMobileNavState(isOpen);
         });
 
-        // Close menu when clicking a nav link
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Close menu when clicking a mobile nav link
+        mobileNavOverlay.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                document.body.classList.remove('nav-open');
+                setMobileNavState(false);
             });
         });
     }
