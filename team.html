@@ -45,19 +45,28 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="index.html" class="logo magnetic">vspr.</a>
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Primary navigation">
                 <a href="index.html#about"     class="nav-link magnetic">About</a>
                 <a href="index.html#expertise" class="nav-link magnetic">Expertise</a>
                 <a href="team.html"            class="nav-link magnetic active">Team</a>
                 <a href="index.html#contact"   class="nav-link magnetic">Contact</a>
             </nav>
             <button class="nav-btn magnetic">Let's Talk</button>
-            <button class="menu-btn" aria-label="Toggle navigation">
+            <button class="menu-btn" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false">
                 <span></span>
                 <span></span>
             </button>
         </div>
     </header>
+
+    <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true">
+        <nav class="mobile-nav-links" aria-label="Mobile navigation">
+            <a href="index.html#about"     class="nav-link magnetic">About</a>
+            <a href="index.html#expertise" class="nav-link magnetic">Expertise</a>
+            <a href="team.html"            class="nav-link magnetic active">Team</a>
+            <a href="index.html#contact"   class="nav-link magnetic">Contact</a>
+        </nav>
+    </div>
 
     <main>
         <!-- Team Hero -->

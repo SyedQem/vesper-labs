@@ -45,19 +45,28 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="#" class="logo magnetic">vspr.</a>
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Primary navigation">
                 <a href="#about"     class="nav-link magnetic" data-section="about">About</a>
                 <a href="#expertise" class="nav-link magnetic" data-section="expertise">Expertise</a>
                 <a href="#team"      class="nav-link magnetic" data-section="team">Team</a>
                 <a href="#contact"   class="nav-link magnetic" data-section="contact">Contact</a>
             </nav>
             <button class="nav-btn magnetic">Let's Talk</button>
-            <button class="menu-btn" aria-label="Toggle navigation">
+            <button class="menu-btn" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false">
                 <span></span>
                 <span></span>
             </button>
         </div>
     </header>
+
+    <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true">
+        <nav class="mobile-nav-links" aria-label="Mobile navigation">
+            <a href="#about"     class="nav-link magnetic" data-section="about">About</a>
+            <a href="#expertise" class="nav-link magnetic" data-section="expertise">Expertise</a>
+            <a href="#team"      class="nav-link magnetic" data-section="team">Team</a>
+            <a href="#contact"   class="nav-link magnetic" data-section="contact">Contact</a>
+        </nav>
+    </div>
 
     <main data-scroll-container>
         <!-- Hero Section -->
