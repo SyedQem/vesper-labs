@@ -1,0 +1,6 @@
+{
+    "redirects": [
+        { "source": "/team.html", "destination": "/team", "permanent": true }
+    ],
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

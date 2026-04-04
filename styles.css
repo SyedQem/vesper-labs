@@ -98,7 +98,8 @@ body.custom-cursor-enabled [contenteditable='true'] {
 }
 
 html {
-    scroll-behavior: smooth;
+    /* Lenis drives smooth scroll when enabled; avoid double-smoothing */
+    scroll-behavior: auto;
     font-size: 16px;
 }
 
