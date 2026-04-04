@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PageMeta from '../components/PageMeta.jsx';
-import { getPostBySlug } from '../data/posts.js';
+import { getPostBySlug } from '../content/blog/index.js';
 
 function formatDate(dateValue) {
     return new Date(dateValue).toLocaleDateString('en-US', {
@@ -13,7 +13,32 @@ function formatDate(dateValue) {
 
 export default function BlogPost() {
     const { slug } = useParams();
-    const post = useMemo(() => getPostBySlug(slug), [slug]);
+    const [post, setPost] = useState(undefined);
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (!slug) {
+            setPost(null);
+            return () => {
+                mounted = false;
+            };
+        }
+
+        getPostBySlug(slug).then((entry) => {
+            if (mounted) {
+                setPost(entry ?? null);
+            }
+        });
+
+        return () => {
+            mounted = false;
+        };
+    }, [slug]);
+
+    if (post === undefined) {
+        return null;
+    }
 
     if (!post) {
         return (
@@ -37,10 +62,10 @@ export default function BlogPost() {
     return (
         <>
             <PageMeta
-                title={`${post.title} | Vesper Labs`}
-                description={post.description ?? post.excerpt}
+                title={post.seo.metaTitle}
+                description={post.seo.metaDescription}
                 path={`/blog/${post.slug}`}
-                image={post.coverImage.src}
+                image={post.seo.ogImage}
             />
 
             <section className="section" aria-labelledby="blog-post-heading">
@@ -53,16 +78,13 @@ export default function BlogPost() {
                             )}
                             <h1 id="blog-post-heading">{post.title}</h1>
                             <p>{post.excerpt}</p>
+                            <p className="blog-card-date">By {post.author}</p>
                         </header>
 
-                        <img
-                            className="blog-post-cover"
-                            src={post.coverImage.src}
-                            alt={post.coverImage.alt}
-                        />
+                        <img className="blog-post-cover" src={post.coverImage.src} alt={post.coverImage.alt} />
 
                         <div className="blog-post-body">
-                            {post.content.map((section) => (
+                            {post.body.map((section) => (
                                 <section key={section.heading}>
                                     <h2>{section.heading}</h2>
                                     {section.paragraphs.map((paragraph) => (

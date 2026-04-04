@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta.jsx';
-import { getAllPosts } from '../data/posts.js';
+import { getAllPosts } from '../content/blog/index.js';
 
 const POSTS_PER_PAGE = 6;
 
@@ -14,8 +14,22 @@ function formatDate(dateValue) {
 }
 
 export default function Blog() {
-    const posts = useMemo(() => getAllPosts(), []);
+    const [posts, setPosts] = useState([]);
     const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+
+    useEffect(() => {
+        let mounted = true;
+
+        getAllPosts().then((entries) => {
+            if (mounted) {
+                setPosts(entries);
+            }
+        });
+
+        return () => {
+            mounted = false;
+        };
+    }, []);
 
     const visiblePosts = posts.slice(0, visibleCount);
     const hasMorePosts = visibleCount < posts.length;

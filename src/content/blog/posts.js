@@ -1,19 +1,18 @@
-const posts = [
+export const posts = [
     {
-        slug: 'shipping-fast-with-design-systems',
         title: 'Shipping Faster with a Product-Grade Design System',
+        slug: 'shipping-fast-with-design-systems',
         excerpt:
             'How our team codifies interface patterns to reduce regressions, increase delivery speed, and keep UX quality high across releases.',
         publishedAt: '2026-02-10',
         updatedAt: '2026-03-01',
-        tags: ['Design Systems', 'Frontend', 'Process'],
+        author: 'Vesper Labs Editorial Team',
         coverImage: {
             src: '/og-image.svg',
             alt: 'Abstract monochrome geometric composition representing a design system.'
         },
-        description:
-            'Learn how Vesper Labs uses design systems to ship user-facing features faster without sacrificing quality.',
-        content: [
+        tags: ['Design Systems', 'Frontend', 'Process'],
+        body: [
             {
                 heading: 'Why consistency matters at scale',
                 paragraphs: [
@@ -28,22 +27,28 @@ const posts = [
                     'Each component ships with usage examples and accessibility guidance to keep implementation decisions obvious for every team member.'
                 ]
             }
-        ]
+        ],
+        seo: {
+            metaTitle: 'Shipping Faster with a Product-Grade Design System | Vesper Labs',
+            metaDescription:
+                'Learn how Vesper Labs uses design systems to ship user-facing features faster without sacrificing quality.',
+            ogImage: '/og-image.svg'
+        }
     },
     {
-        slug: 'observability-for-modern-products',
         title: 'Observability for Modern Product Teams',
+        slug: 'observability-for-modern-products',
         excerpt:
             'A practical playbook for combining logs, traces, and user telemetry to spot issues before customers do.',
         publishedAt: '2026-01-18',
-        tags: ['Observability', 'Reliability', 'Engineering'],
+        updatedAt: '2026-01-18',
+        author: 'Vesper Labs Engineering',
         coverImage: {
             src: '/og-image.svg',
             alt: 'Stylized line graph and signal waves indicating system observability metrics.'
         },
-        description:
-            'A practical guide to implementing observability workflows that improve reliability and customer confidence.',
-        content: [
+        tags: ['Observability', 'Reliability', 'Engineering'],
+        body: [
             {
                 heading: 'Signal over noise',
                 paragraphs: [
@@ -51,22 +56,28 @@ const posts = [
                     'When incidents happen, clear tracing and structured logs reduce time-to-diagnosis and help teams recover faster.'
                 ]
             }
-        ]
+        ],
+        seo: {
+            metaTitle: 'Observability for Modern Product Teams | Vesper Labs',
+            metaDescription:
+                'A practical guide to implementing observability workflows that improve reliability and customer confidence.',
+            ogImage: '/og-image.svg'
+        }
     },
     {
-        slug: 'pragmatic-ai-in-product-development',
         title: 'Pragmatic AI in Product Development',
+        slug: 'pragmatic-ai-in-product-development',
         excerpt:
             'Where AI features create durable value, and where traditional product improvements are still the better bet.',
         publishedAt: '2025-12-02',
-        tags: ['AI', 'Product Strategy'],
+        updatedAt: '2025-12-02',
+        author: 'Vesper Labs Product',
         coverImage: {
             src: '/og-image.svg',
             alt: 'Minimal monochrome network nodes connected to represent practical AI systems.'
         },
-        description:
-            'Explore practical ways to ship AI features that solve real customer problems and avoid unnecessary complexity.',
-        content: [
+        tags: ['AI', 'Product Strategy'],
+        body: [
             {
                 heading: 'Start with workflows, not models',
                 paragraphs: [
@@ -74,14 +85,12 @@ const posts = [
                     'A narrowly scoped model in the right workflow usually beats a broad but unreliable assistant.'
                 ]
             }
-        ]
+        ],
+        seo: {
+            metaTitle: 'Pragmatic AI in Product Development | Vesper Labs',
+            metaDescription:
+                'Explore practical ways to ship AI features that solve real customer problems and avoid unnecessary complexity.',
+            ogImage: '/og-image.svg'
+        }
     }
 ];
-
-export function getAllPosts() {
-    return [...posts].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-}
-
-export function getPostBySlug(slug) {
-    return posts.find((post) => post.slug === slug);
-}
