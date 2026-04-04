@@ -57,7 +57,7 @@ export default function Team() {
             </Helmet>
 
             <section className="team-hero">
-                <span className="team-hero-label">03 // The People</span>
+                <span className="team-hero-label">04 // The People</span>
                 <motion.h1
                     className="team-hero-title"
                     initial={{ opacity: 0.2, y: 30 }}

@@ -177,6 +177,14 @@ export default function Header({ lenisEnabled }) {
                                     <span className="magnetic-inner">Expertise</span>
                                 </a>
                                 <a
+                                    href="#projects"
+                                    className="nav-link magnetic"
+                                    data-section="projects"
+                                    onClick={(e) => goHomeSection(e, '#projects')}
+                                >
+                                    <span className="magnetic-inner">Projects</span>
+                                </a>
+                                <a
                                     href="#team"
                                     className="nav-link magnetic"
                                     data-section="team"
@@ -208,6 +216,13 @@ export default function Header({ lenisEnabled }) {
                                     onClick={(e) => goHomeSection(e, '#expertise')}
                                 >
                                     <span className="magnetic-inner">Expertise</span>
+                                </Link>
+                                <Link
+                                    to="/#projects"
+                                    className="nav-link magnetic"
+                                    onClick={(e) => goHomeSection(e, '#projects')}
+                                >
+                                    <span className="magnetic-inner">Projects</span>
                                 </Link>
                                 <Link to="/team" className="nav-link magnetic active">
                                     <span className="magnetic-inner">Team</span>
@@ -264,6 +279,14 @@ export default function Header({ lenisEnabled }) {
                                 <span className="magnetic-inner">Expertise</span>
                             </a>
                             <a
+                                href="#projects"
+                                className="nav-link magnetic"
+                                data-section="projects"
+                                onClick={(e) => goHomeSection(e, '#projects')}
+                            >
+                                <span className="magnetic-inner">Projects</span>
+                            </a>
+                            <a
                                 href="#team"
                                 className="nav-link magnetic"
                                 data-section="team"
@@ -295,6 +318,13 @@ export default function Header({ lenisEnabled }) {
                                 onClick={(e) => goHomeSection(e, '#expertise')}
                             >
                                 <span className="magnetic-inner">Expertise</span>
+                            </Link>
+                            <Link
+                                to="/#projects"
+                                className="nav-link magnetic"
+                                onClick={(e) => goHomeSection(e, '#projects')}
+                            >
+                                <span className="magnetic-inner">Projects</span>
                             </Link>
                             <Link to="/team" className="nav-link magnetic active">
                                 <span className="magnetic-inner">Team</span>

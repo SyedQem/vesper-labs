@@ -700,6 +700,11 @@ body.nav-open .menu-btn span:last-child {
     color: var(--clr-text-dark);
 }
 
+.projects-footnote {
+    margin-top: var(--space-md);
+    max-width: none;
+}
+
 /* Marquee Section */
 .marquee {
     padding: var(--space-xxl) 0;

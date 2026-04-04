@@ -8,6 +8,8 @@ import useHashScroll from '../hooks/useHashScroll.js';
 import { easeOutExpo, fadeUpTransition } from '../motionConfig.js';
 
 const SITE = 'https://vesper-labs.vercel.app';
+const HOME_META_DESCRIPTION =
+    'Vesper Labs — premium digital studio for engineering and design. Darwin is a peer marketplace for university students across Canada to buy, sell, and barter.';
 const ORG_JSON = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -60,7 +62,7 @@ export default function Home() {
         transition: fadeUpTransition(reducedMotion),
     };
 
-    const expertiseContainer = {
+    const rowContainer = {
         hidden: {},
         show: {
             transition: {
@@ -70,7 +72,7 @@ export default function Home() {
         },
     };
 
-    const expertiseItem = {
+    const rowItem = {
         hidden: { opacity: 0.2, y: 24 },
         show: {
             opacity: 1,
@@ -83,16 +85,10 @@ export default function Home() {
         <>
             <Helmet>
                 <title>Vesper Labs | Engineering Tomorrow</title>
-                <meta
-                    name="description"
-                    content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design."
-                />
+                <meta name="description" content={HOME_META_DESCRIPTION} />
                 <link rel="canonical" href={`${SITE}/`} />
                 <meta property="og:title" content="Vesper Labs | Engineering Tomorrow" />
-                <meta
-                    property="og:description"
-                    content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design."
-                />
+                <meta property="og:description" content={HOME_META_DESCRIPTION} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content={`${SITE}/`} />
                 <meta property="og:image" content={`${SITE}/og-image.svg`} />
@@ -101,10 +97,7 @@ export default function Home() {
                 <meta property="og:image:alt" content="Vesper Labs — Engineering Tomorrow" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Vesper Labs | Engineering Tomorrow" />
-                <meta
-                    name="twitter:description"
-                    content="Vesper Labs - A premium innovation studio pushing the boundaries of digital engineering and design."
-                />
+                <meta name="twitter:description" content={HOME_META_DESCRIPTION} />
                 <meta name="twitter:image" content={`${SITE}/og-image.svg`} />
                 <script type="application/ld+json">{JSON.stringify(ORG_JSON)}</script>
             </Helmet>
@@ -146,9 +139,9 @@ export default function Home() {
                             engineering, design, and continuous innovation.
                         </p>
                         <a
-                            href="#expertise"
+                            href="#projects"
                             className="btn primary magnetic"
-                            onClick={(e) => scrollToHash(e, '#expertise')}
+                            onClick={(e) => scrollToHash(e, '#projects')}
                         >
                             <span className="magnetic-inner">Explore Work</span>
                         </a>
@@ -193,7 +186,7 @@ export default function Home() {
 
                     <motion.div
                         className="expertise-list"
-                        variants={expertiseContainer}
+                        variants={rowContainer}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true, amount: 0.15 }}
@@ -219,7 +212,7 @@ export default function Home() {
                             <motion.div
                                 key={title}
                                 className="expertise-item hover-reveal"
-                                variants={expertiseItem}
+                                variants={rowItem}
                             >
                                 <h3 className="expertise-name">{title}</h3>
                                 <p className="expertise-desc">{desc}</p>
@@ -229,10 +222,43 @@ export default function Home() {
                 </div>
             </section>
 
+            <section className="projects section" id="projects">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="label-text">03 // Projects</span>
+                        <motion.h2 className="section-title" {...fadeUp}>
+                            Selected work
+                        </motion.h2>
+                    </div>
+
+                    <motion.div
+                        className="expertise-list"
+                        variants={rowContainer}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.15 }}
+                    >
+                        <motion.div
+                            className="expertise-item hover-reveal"
+                            variants={rowItem}
+                        >
+                            <h3 className="expertise-name">Darwin</h3>
+                            <p className="expertise-desc">
+                                Peer marketplace for university students across Canada — buy, sell,
+                                and barter with a focused, trustworthy experience.
+                            </p>
+                        </motion.div>
+                    </motion.div>
+                    <p className="expertise-desc projects-footnote">
+                        More projects in development.
+                    </p>
+                </div>
+            </section>
+
             <section className="team-inline section" id="team">
                 <div className="container">
                     <div className="section-header">
-                        <span className="label-text">03 // The People</span>
+                        <span className="label-text">04 // The People</span>
                         <motion.h2 className="section-title" {...fadeUp}>
                             The Team
                         </motion.h2>

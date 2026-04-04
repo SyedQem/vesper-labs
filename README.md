@@ -78,6 +78,16 @@ Design tokens live at the top of `styles.css`:
 
 ---
 
+## Projects section (optional follow-ups)
+
+The home page **Selected work** block currently lists **Darwin** in [`src/pages/Home.jsx`](src/pages/Home.jsx). Possible next steps:
+
+- Refactor rows into a small `PROJECTS` data array and `.map()` over it when you add more work.
+- Add a muted badge (e.g. “Marketplace · Canada”) or an external link row when a public URL exists.
+- Optional JSON-LD (`SoftwareApplication` / `WebApplication`) for Darwin once live vs. in-development status is clear.
+
+---
+
 ## Founder
 
 Built by **Qurb E Muhammad Syed** — driven by the belief that the best digital experiences live at the intersection of precision engineering and timeless design.
