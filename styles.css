@@ -1266,25 +1266,42 @@ body:not(.nav-open) .header.scrolled {
 
 .blog-page-header {
     max-width: 760px;
-    margin-bottom: var(--space-lg);
+    margin: 0 auto var(--space-lg);
+}
+
+.blog-page-header h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-bottom: 0.75rem;
 }
 
 .blog-page-header p {
     color: var(--clr-text-muted);
-    margin-top: 0.75rem;
+    max-width: 62ch;
 }
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
 }
 
 .blog-card {
     border: 1px solid var(--clr-border);
-    border-radius: 10px;
+    border-radius: 14px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.02);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.blog-card > a,
+.blog-card h2 a {
+    display: block;
 }
 
 .blog-card img,
@@ -1306,12 +1323,34 @@ body:not(.nav-open) .header.scrolled {
 }
 
 .blog-card h2 {
-    font-size: 1.35rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.7rem);
     margin-bottom: 0.5rem;
 }
 
 .blog-card p {
     color: #d8d8d8;
+}
+
+.blog-card h2 a {
+    border-radius: 2px;
+    transition: color var(--transition-fast);
+}
+
+.blog-card h2 a:hover {
+    color: #e7e7e7;
+}
+
+.blog-card:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.16);
+}
+
+.blog-card h2 a:focus-visible,
+.blog-post a:focus-visible,
+.blog-missing-post a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.95);
+    outline-offset: 4px;
 }
 
 .blog-tag-list {
@@ -1378,18 +1417,118 @@ body:not(.nav-open) .header.scrolled {
     font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
+.blog-post-header > p:last-child {
+    color: #d8d8d8;
+    max-width: 66ch;
+}
+
 .blog-post-body {
     margin-top: var(--space-md);
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
+    line-height: 1.75;
+}
+
+.blog-post-body section {
+    display: grid;
+    gap: 1rem;
+}
+
+.blog-post-body h2,
+.blog-post-body h3,
+.blog-post-body h4 {
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
 }
 
 .blog-post-body h2 {
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
 }
 
-.blog-post-body p {
+.blog-post-body h3 {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+}
+
+.blog-post-body p,
+.blog-post-body li {
     color: #d8d8d8;
-    margin-bottom: 0.75rem;
+}
+
+.blog-post-body ul,
+.blog-post-body ol {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.blog-post-body ul {
+    list-style: disc;
+}
+
+.blog-post-body ol {
+    list-style: decimal;
+}
+
+.blog-post-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9em;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 0.12rem 0.4rem;
+}
+
+.blog-post-body pre {
+    overflow-x: auto;
+    border: 1px solid var(--clr-border);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 1rem 1.125rem;
+}
+
+.blog-post-body pre code {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    font-size: 0.92rem;
+}
+
+.blog-post-body blockquote {
+    border-left: 2px solid rgba(255, 255, 255, 0.45);
+    padding: 0.4rem 0 0.4rem 1rem;
+    margin: 0.4rem 0;
+    color: #e8e8e8;
+}
+
+@media (min-width: 640px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .blog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .blog-post {
+        max-width: min(860px, 72vw);
+    }
+}
+
+@media (max-width: 767px) {
+    .blog-page-header {
+        margin-bottom: var(--space-md);
+    }
+
+    .blog-post {
+        max-width: 100%;
+    }
+
+    .blog-post-body {
+        gap: 1.5rem;
+    }
 }
