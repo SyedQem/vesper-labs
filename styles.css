@@ -104,6 +104,9 @@ html {
 
 body {
     background-color: var(--clr-bg);
+    background-image:
+        radial-gradient(ellipse 120% 70% at 15% -15%, rgba(255, 255, 255, 0.065), transparent 52%),
+        radial-gradient(ellipse 90% 55% at 95% 40%, rgba(255, 255, 255, 0.035), transparent 50%);
     color: var(--clr-text);
     font-family: var(--font-body);
     font-weight: 400;
@@ -117,6 +120,37 @@ body {
 ::selection {
     background: var(--clr-text);
     color: var(--clr-bg);
+}
+
+.skip-link {
+    position: fixed;
+    top: 0;
+    left: max(1rem, var(--padding-x));
+    z-index: 100001;
+    padding: 0.75rem 1.1rem;
+    background: var(--clr-text);
+    color: var(--clr-bg);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+    transform: translateY(-120%);
+    transition: transform 0.25s var(--ease-out-expo);
+}
+
+.skip-link:focus-visible {
+    transform: translateY(1rem);
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.95);
+    outline-offset: 4px;
 }
 
 a {
@@ -200,19 +234,6 @@ h1, h2, h3, h4, h5, h6, .logo {
 /* ==========================================================================
    Components
    ========================================================================== */
-
-/* Noise Overlay */
-.noise-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.04;
-    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-}
 
 /* Custom Cursor */
 .cursor-dot,
@@ -1170,5 +1191,65 @@ body:not(.nav-open) .header.scrolled {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--clr-text-muted);
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+
+    .hero .line,
+    .hero.loaded .line {
+        transform: translateY(0);
+        transition: none;
+    }
+
+    .reveal-opacity,
+    .hero.loaded .reveal-opacity {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .reveal-text-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .reveal-text-scroll.is-revealed {
+        opacity: 1;
+        transform: none;
+    }
+
+    .scroll-line::after {
+        animation: none;
+    }
+
+    .preloader-fill {
+        animation: none;
+        width: 100%;
+    }
+
+    .preloader {
+        transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+
+    .marquee-inner {
+        animation: none;
+    }
+
+    .availability-dot {
+        animation: none;
+        box-shadow: none;
+    }
 }
 

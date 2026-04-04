@@ -6,16 +6,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     /* ==========================================================================
        Preloader
        ========================================================================== */
     const preloader = document.getElementById('preloader');
 
     if (preloader) {
-        // Wait for the fill animation (0.9s) + brief hold, then dismiss
-        setTimeout(() => {
+        if (prefersReducedMotion) {
             preloader.classList.add('hidden');
-        }, 1100);
+        } else {
+            setTimeout(() => preloader.classList.add('hidden'), 1100);
+        }
     }
 
     /* ==========================================================================
@@ -212,8 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
        Matrix Rain — Hero Canvas Animation
        ========================================================================== */
     const heroCanvas = document.getElementById('hero-canvas');
+    const heroSection = document.querySelector('.hero');
 
-    if (heroCanvas) {
+    if (heroCanvas && heroSection) {
         const ctx = heroCanvas.getContext('2d');
         const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΑΒΓΔΘΛΞΠΣΦΨΩアイウエオカキクケコサシスセソタチツテトナニヌネノ';
         const FONT_SIZE = 14;
@@ -225,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function initCanvas() {
             heroCanvas.width  = heroCanvas.offsetWidth;
             heroCanvas.height = heroCanvas.offsetHeight;
-            const numCols = Math.floor(heroCanvas.width / FONT_SIZE);
+            const numCols = Math.max(1, Math.floor(heroCanvas.width / FONT_SIZE));
             columns = Array.from({ length: numCols }, () =>
                 Math.floor(Math.random() * (heroCanvas.height / FONT_SIZE))
             );
@@ -233,58 +237,59 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
         }
 
-        function drawFrame(timestamp) {
-            animFrameId = requestAnimationFrame(drawFrame);
-            const elapsed = timestamp - lastFrameTime;
-            if (elapsed < FRAME_INTERVAL) return;
-            lastFrameTime = timestamp - (elapsed % FRAME_INTERVAL);
+        initCanvas();
 
-            ctx.fillStyle = 'rgba(3, 3, 3, 0.18)';
-            ctx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
+        if (!prefersReducedMotion) {
+            function drawFrame(timestamp) {
+                animFrameId = requestAnimationFrame(drawFrame);
+                const elapsed = timestamp - lastFrameTime;
+                if (elapsed < FRAME_INTERVAL) return;
+                lastFrameTime = timestamp - (elapsed % FRAME_INTERVAL);
 
-            ctx.font = `${FONT_SIZE}px 'Space Grotesk', monospace`;
+                ctx.fillStyle = 'rgba(3, 3, 3, 0.18)';
+                ctx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
 
-            columns.forEach((y, i) => {
-                const char       = CHARS[Math.floor(Math.random() * CHARS.length)];
-                const brightness = Math.random() > 0.92 ? '255, 255, 255' : '180, 180, 180';
-                ctx.fillStyle    = `rgb(${brightness})`;
-                ctx.fillText(char, i * FONT_SIZE, y * FONT_SIZE);
+                ctx.font = `${FONT_SIZE}px 'Space Grotesk', monospace`;
 
-                if (y * FONT_SIZE > heroCanvas.height && Math.random() > 0.975) {
-                    columns[i] = 0;
-                } else {
-                    columns[i] = y + 1;
-                }
-            });
-        }
+                columns.forEach((y, i) => {
+                    const char       = CHARS[Math.floor(Math.random() * CHARS.length)];
+                    const brightness = Math.random() > 0.92 ? '255, 255, 255' : '180, 180, 180';
+                    ctx.fillStyle    = `rgb(${brightness})`;
+                    ctx.fillText(char, i * FONT_SIZE, y * FONT_SIZE);
 
-        const startRain = () => { if (!animFrameId) animFrameId = requestAnimationFrame(drawFrame); };
-        const stopRain  = () => { if (animFrameId) { cancelAnimationFrame(animFrameId); animFrameId = null; } };
+                    if (y * FONT_SIZE > heroCanvas.height && Math.random() > 0.975) {
+                        columns[i] = 0;
+                    } else {
+                        columns[i] = y + 1;
+                    }
+                });
+            }
 
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
+            const startRain = () => { if (!animFrameId) animFrameId = requestAnimationFrame(drawFrame); };
+            const stopRain  = () => { if (animFrameId) { cancelAnimationFrame(animFrameId); animFrameId = null; } };
+
             new IntersectionObserver(
                 (entries) => entries[0].isIntersecting ? startRain() : stopRain(),
                 { threshold: 0.01 }
             ).observe(heroSection);
+
+            let resizeTimer;
+            const resizeObserver = new ResizeObserver(() => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => { stopRain(); initCanvas(); startRain(); }, 150);
+            });
+            resizeObserver.observe(heroSection);
+
+            startRain();
         }
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => { stopRain(); initCanvas(); startRain(); }, 150);
-        });
-
-        initCanvas();
-        startRain();
     }
 
     /* ==========================================================================
        Hero Load Animation
        ========================================================================== */
-    const heroSection = document.querySelector('.hero');
     if (heroSection) {
-        setTimeout(() => heroSection.classList.add('loaded'), 1150); // after preloader
+        const heroLoadDelay = prefersReducedMotion ? 0 : 1100;
+        setTimeout(() => heroSection.classList.add('loaded'), heroLoadDelay);
     }
 
     /* ==========================================================================
