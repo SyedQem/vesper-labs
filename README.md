@@ -5,7 +5,6 @@ Vesper Labs is a premium digital innovation studio website — a dark, minimalis
 The site is a **Vite + React** SPA with **Framer Motion** for scroll and entrance animations and **Lenis** for smooth scrolling (disabled when the user prefers reduced motion).
 
 ---
-
 ## What's in here
 
 ```
