@@ -184,14 +184,13 @@ export default function Header({ lenisEnabled }) {
                                 >
                                     <span className="magnetic-inner">Projects</span>
                                 </a>
-                                <a
-                                    href="#team"
+                                <Link
+                                    to="/team"
                                     className="nav-link magnetic"
-                                    data-section="team"
-                                    onClick={(e) => goHomeSection(e, '#team')}
+                                    onClick={() => setNavOpen(false)}
                                 >
                                     <span className="magnetic-inner">Team</span>
-                                </a>
+                                </Link>
                                 <a
                                     href="#contact"
                                     className="nav-link magnetic"
@@ -286,14 +285,13 @@ export default function Header({ lenisEnabled }) {
                             >
                                 <span className="magnetic-inner">Projects</span>
                             </a>
-                            <a
-                                href="#team"
+                            <Link
+                                to="/team"
                                 className="nav-link magnetic"
-                                data-section="team"
-                                onClick={(e) => goHomeSection(e, '#team')}
+                                onClick={() => setNavOpen(false)}
                             >
                                 <span className="magnetic-inner">Team</span>
-                            </a>
+                            </Link>
                             <a
                                 href="#contact"
                                 className="nav-link magnetic"
