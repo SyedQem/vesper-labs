@@ -12,6 +12,7 @@ export default function Header({ lenisEnabled }) {
     const [navOpen, setNavOpen] = useState(false);
     const isHome = location.pathname === '/';
     const isBlogRoute = location.pathname.startsWith('/blog');
+    const isTeamRoute = location.pathname === '/team';
 
     const scrollToSelector = useCallback(
         (hash) => {
@@ -192,6 +193,13 @@ export default function Header({ lenisEnabled }) {
                                 >
                                     <span className="magnetic-inner">Team</span>
                                 </Link>
+                                <Link
+                                    to="/blog"
+                                    className="nav-link magnetic"
+                                    onClick={() => setNavOpen(false)}
+                                >
+                                    <span className="magnetic-inner">Blog</span>
+                                </Link>
                                 <a
                                     href="#contact"
                                     className="nav-link magnetic"
@@ -224,7 +232,7 @@ export default function Header({ lenisEnabled }) {
                                 >
                                     <span className="magnetic-inner">Projects</span>
                                 </Link>
-                                <Link to="/team" className="nav-link magnetic active">
+                                <Link to="/team" className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}>
                                     <span className="magnetic-inner">Team</span>
                                 </Link>
                                 <Link
@@ -300,6 +308,13 @@ export default function Header({ lenisEnabled }) {
                             >
                                 <span className="magnetic-inner">Team</span>
                             </Link>
+                            <Link
+                                to="/blog"
+                                className="nav-link magnetic"
+                                onClick={() => setNavOpen(false)}
+                            >
+                                <span className="magnetic-inner">Blog</span>
+                            </Link>
                             <a
                                 href="#contact"
                                 className="nav-link magnetic"
@@ -332,7 +347,7 @@ export default function Header({ lenisEnabled }) {
                             >
                                 <span className="magnetic-inner">Projects</span>
                             </Link>
-                            <Link to="/team" className="nav-link magnetic active">
+                            <Link to="/team" className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}>
                                 <span className="magnetic-inner">Team</span>
                             </Link>
                             <Link
