@@ -243,10 +243,20 @@ export default function Home() {
                             variants={rowItem}
                         >
                             <h3 className="expertise-name">Darwin</h3>
-                            <p className="expertise-desc">
-                                Peer marketplace for university students across Canada — buy, sell,
-                                and barter with a focused, trustworthy experience.
-                            </p>
+                            <div className="project-detail">
+                                <p className="expertise-desc">
+                                    Peer marketplace for university students across Canada — buy, sell,
+                                    and barter with a focused, trustworthy experience.
+                                </p>
+                                <a
+                                    href="https://darwinmarket.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn secondary magnetic project-cta"
+                                >
+                                    <span className="magnetic-inner">Visit Darwin &rarr;</span>
+                                </a>
+                            </div>
                         </motion.div>
                     </motion.div>
                     <p className="expertise-desc projects-footnote">
