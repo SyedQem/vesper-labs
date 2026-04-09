@@ -2,5 +2,11 @@
     "redirects": [
         { "source": "/team.html", "destination": "/team", "permanent": true }
     ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    "rewrites": [
+        { "source": "/api/auth", "destination": "/api/auth" },
+        { "source": "/api/callback", "destination": "/api/callback" },
+        { "source": "/admin", "destination": "/admin/index.html" },
+        { "source": "/admin/", "destination": "/admin/index.html" },
+        { "source": "/((?!admin|api).*)", "destination": "/index.html" }
+    ]
 }
