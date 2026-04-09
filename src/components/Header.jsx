@@ -191,16 +191,6 @@ export default function Header({ lenisEnabled }) {
                                     onClick={() => setNavOpen(false)}
                                 >
                                     <span className="magnetic-inner">Team</span>
-<<<<<<< HEAD
-=======
-                                </a>
-                                <Link
-                                    to="/blog"
-                                    className={`nav-link magnetic${isBlogRoute ? ' active' : ''}`}
-                                    onClick={() => setNavOpen(false)}
-                                >
-                                    <span className="magnetic-inner">Blog</span>
->>>>>>> 1e29075c083722bd6fc6e9ba1f3d258dc4d55f68
                                 </Link>
                                 <a
                                     href="#contact"
@@ -309,16 +299,6 @@ export default function Header({ lenisEnabled }) {
                                 onClick={() => setNavOpen(false)}
                             >
                                 <span className="magnetic-inner">Team</span>
-<<<<<<< HEAD
-=======
-                            </a>
-                            <Link
-                                to="/blog"
-                                className={`nav-link magnetic${isBlogRoute ? ' active' : ''}`}
-                                onClick={() => setNavOpen(false)}
-                            >
-                                <span className="magnetic-inner">Blog</span>
->>>>>>> 1e29075c083722bd6fc6e9ba1f3d258dc4d55f68
                             </Link>
                             <a
                                 href="#contact"

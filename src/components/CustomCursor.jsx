@@ -5,17 +5,22 @@ export default function CustomCursor() {
     const dot = useRef(null);
     const outline = useRef(null);
     const location = useLocation();
+    const hoverHandlersRef = useRef({ onHoverEnter: null, onHoverLeave: null });
+    const unbindHoverRef = useRef(() => {});
+    const cursorStateRef = useRef({
+        initialized: false,
+        hasPointerPosition: false,
+        mouseX: 0,
+        mouseY: 0,
+        dotX: 0,
+        dotY: 0,
+        outlineX: 0,
+        outlineY: 0,
+    });
 
     useEffect(() => {
         const finePointerMediaQuery = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
-        let cursorInitialized = false;
         let rafId = 0;
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let dotX = mouseX;
-        let dotY = mouseY;
-        let outlineX = mouseX;
-        let outlineY = mouseY;
 
         const syncCustomCursorCapability = () => {
             const isEnabled = finePointerMediaQuery.matches;
@@ -30,10 +35,29 @@ export default function CustomCursor() {
             document.body.classList.toggle('cursor-inactive', isInactive);
         };
 
+        const syncCursorPosition = () => {
+            const { mouseX, mouseY } = cursorStateRef.current;
+            cursorStateRef.current.dotX = mouseX;
+            cursorStateRef.current.dotY = mouseY;
+            cursorStateRef.current.outlineX = mouseX;
+            cursorStateRef.current.outlineY = mouseY;
+            if (dot.current) {
+                dot.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            }
+            if (outline.current) {
+                outline.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            }
+        };
+
         const onPointerMove = (e) => {
             if (!finePointerMediaQuery.matches || e.pointerType === 'touch') return;
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            const state = cursorStateRef.current;
+            state.mouseX = e.clientX;
+            state.mouseY = e.clientY;
+            if (!state.hasPointerPosition) {
+                state.hasPointerPosition = true;
+                syncCursorPosition();
+            }
             setCursorInactive(false);
         };
 
@@ -42,41 +66,60 @@ export default function CustomCursor() {
             document.body.classList.remove('cursor-hover');
         };
 
-        const onMouseEnter = () => setCursorInactive(false);
+        const onMouseEnter = () => {
+            if (cursorStateRef.current.hasPointerPosition) {
+                setCursorInactive(false);
+            }
+        };
         const onBlur = () => setCursorInactive(true);
-        const onFocus = () => setCursorInactive(false);
+        const onFocus = () => {
+            if (cursorStateRef.current.hasPointerPosition) {
+                setCursorInactive(false);
+            }
+        };
         const onVisibility = () => {
-            setCursorInactive(document.hidden);
+            const shouldHide = document.hidden || !cursorStateRef.current.hasPointerPosition;
+            setCursorInactive(shouldHide);
             if (document.hidden) document.body.classList.remove('cursor-hover');
         };
 
-        const hoverEls = () => document.querySelectorAll('a, button, .hover-reveal');
-        const onHoverEnter = () => {
-            if (!finePointerMediaQuery.matches) return;
-            setCursorInactive(false);
-            document.body.classList.add('cursor-hover');
+        hoverHandlersRef.current = {
+            onHoverEnter: () => {
+                if (!finePointerMediaQuery.matches) return;
+                if (!cursorStateRef.current.hasPointerPosition) return;
+                setCursorInactive(false);
+                document.body.classList.add('cursor-hover');
+            },
+            onHoverLeave: () => document.body.classList.remove('cursor-hover'),
         };
-        const onHoverLeave = () => document.body.classList.remove('cursor-hover');
 
         const bindHover = () => {
-            hoverEls().forEach((el) => {
+            const { onHoverEnter, onHoverLeave } = hoverHandlersRef.current;
+            const hoverEls = document.querySelectorAll('a, button, .hover-reveal');
+            hoverEls.forEach((el) => {
                 el.addEventListener('mouseenter', onHoverEnter);
                 el.addEventListener('mouseleave', onHoverLeave);
             });
-        };
-
-        const unbindHover = () => {
-            hoverEls().forEach((el) => {
-                el.removeEventListener('mouseenter', onHoverEnter);
-                el.removeEventListener('mouseleave', onHoverLeave);
-            });
+            return () => {
+                hoverEls.forEach((el) => {
+                    el.removeEventListener('mouseenter', onHoverEnter);
+                    el.removeEventListener('mouseleave', onHoverLeave);
+                });
+            };
         };
 
         const initializeCustomCursor = () => {
-            if (cursorInitialized || !dot.current || !outline.current || !syncCustomCursorCapability()) {
+            if (
+                cursorStateRef.current.initialized ||
+                !dot.current ||
+                !outline.current ||
+                !syncCustomCursorCapability()
+            ) {
                 return;
             }
-            cursorInitialized = true;
+
+            cursorStateRef.current.initialized = true;
+            setCursorInactive(!cursorStateRef.current.hasPointerPosition);
 
             window.addEventListener('pointermove', onPointerMove);
             document.addEventListener('mouseleave', onMouseLeave);
@@ -85,29 +128,49 @@ export default function CustomCursor() {
             window.addEventListener('focus', onFocus);
             document.addEventListener('visibilitychange', onVisibility);
 
+            if (cursorStateRef.current.hasPointerPosition) {
+                syncCursorPosition();
+            }
+
             function renderCursor() {
                 if (!dot.current || !outline.current) return;
-                dotX += (mouseX - dotX) * 0.5;
-                dotY += (mouseY - dotY) * 0.5;
-                outlineX += (mouseX - outlineX) * 0.15;
-                outlineY += (mouseY - outlineY) * 0.15;
-                dot.current.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
-                outline.current.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+                const state = cursorStateRef.current;
+                if (state.hasPointerPosition) {
+                    state.dotX += (state.mouseX - state.dotX) * 0.5;
+                    state.dotY += (state.mouseY - state.dotY) * 0.5;
+                    state.outlineX += (state.mouseX - state.outlineX) * 0.15;
+                    state.outlineY += (state.mouseY - state.outlineY) * 0.15;
+                    dot.current.style.transform =
+                        `translate3d(${state.dotX}px, ${state.dotY}px, 0) translate(-50%, -50%)`;
+                    outline.current.style.transform =
+                        `translate3d(${state.outlineX}px, ${state.outlineY}px, 0) translate(-50%, -50%)`;
+                }
                 rafId = requestAnimationFrame(renderCursor);
             }
+
             renderCursor();
-            bindHover();
+            unbindHoverRef.current = bindHover();
         };
 
         syncCustomCursorCapability();
         initializeCustomCursor();
 
         const onFinePointerChange = () => {
-            syncCustomCursorCapability();
-            if (finePointerMediaQuery.matches && !cursorInitialized) {
+            const isEnabled = syncCustomCursorCapability();
+            if (isEnabled && !cursorStateRef.current.initialized) {
                 initializeCustomCursor();
+                return;
+            }
+            if (!isEnabled) {
+                setCursorInactive(true);
+            } else {
+                setCursorInactive(!cursorStateRef.current.hasPointerPosition);
+                if (cursorStateRef.current.hasPointerPosition) {
+                    syncCursorPosition();
+                }
             }
         };
+
         if (typeof finePointerMediaQuery.addEventListener === 'function') {
             finePointerMediaQuery.addEventListener('change', onFinePointerChange);
         } else {
@@ -116,7 +179,7 @@ export default function CustomCursor() {
 
         return () => {
             cancelAnimationFrame(rafId);
-            unbindHover();
+            unbindHoverRef.current();
             window.removeEventListener('pointermove', onPointerMove);
             document.removeEventListener('mouseleave', onMouseLeave);
             document.removeEventListener('mouseenter', onMouseEnter);
@@ -129,6 +192,33 @@ export default function CustomCursor() {
                 finePointerMediaQuery.removeListener(onFinePointerChange);
             }
             document.body.classList.remove('custom-cursor-enabled', 'cursor-hover', 'cursor-inactive');
+            cursorStateRef.current.initialized = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!cursorStateRef.current.initialized) return;
+        unbindHoverRef.current();
+
+        const { onHoverEnter, onHoverLeave } = hoverHandlersRef.current;
+        const hoverEls = document.querySelectorAll('a, button, .hover-reveal');
+        hoverEls.forEach((el) => {
+            el.addEventListener('mouseenter', onHoverEnter);
+            el.addEventListener('mouseleave', onHoverLeave);
+        });
+
+        unbindHoverRef.current = () => {
+            hoverEls.forEach((el) => {
+                el.removeEventListener('mouseenter', onHoverEnter);
+                el.removeEventListener('mouseleave', onHoverLeave);
+            });
+        };
+
+        document.body.classList.remove('cursor-hover');
+
+        return () => {
+            unbindHoverRef.current();
+            unbindHoverRef.current = () => {};
         };
     }, [location.pathname]);
 
