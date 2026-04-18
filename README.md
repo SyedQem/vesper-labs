@@ -1,6 +1,6 @@
-# Vesper Labs
+# Vesper Works
 
-Vesper Labs is a premium digital innovation studio website — a dark, minimalist portfolio. The design philosophy is simple: precision over noise, motion with purpose, and typography that speaks for itself.
+Vesper Works is a premium digital innovation studio website — a dark, minimalist portfolio. The design philosophy is simple: precision over noise, motion with purpose, and typography that speaks for itself.
 
 The site is a **Vite + React** SPA with **Framer Motion** for scroll and entrance animations and **Lenis** for smooth scrolling (disabled when the user prefers reduced motion).
 
@@ -8,7 +8,7 @@ The site is a **Vite + React** SPA with **Framer Motion** for scroll and entranc
 ## What's in here
 
 ```
-vesper-labs/
+vesper-Works/
 ├── index.html          # Vite entry shell
 ├── public/
 │   └── og-image.svg    # Open Graph asset
