@@ -33,7 +33,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-socials">
                         <a
-                            href="https://x.com/VesperLabs_"
+                            href="https://x.com/VesperWorks_"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link magnetic"
@@ -41,7 +41,7 @@ export default function Footer() {
                             <span className="magnetic-inner">Twitter</span>
                         </a>
                         <a
-                            href="https://www.instagram.com/vesperlabs_?igsh=cm9wMTluOG96ZmV1"
+                            href="https://www.instagram.com/vesperworks_?igsh=cm9wMTluOG96ZmV1"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link magnetic"
