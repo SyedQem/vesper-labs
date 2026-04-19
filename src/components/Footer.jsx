@@ -25,7 +25,7 @@ export default function Footer() {
                 </div>
                 <div className="footer-bottom">
                     <div className="footer-brand">
-                        <span className="logo">Vesper Labs &copy; 2026</span>
+                        <span className="logo">Vesper Works &copy; 2026</span>
                     </div>
                     <div className="footer-availability">
                         <span className="availability-dot" />
