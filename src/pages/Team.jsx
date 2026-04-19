@@ -85,7 +85,7 @@ export default function Team() {
                         <p className="team-card-inline-bio">
                             Driven by a conviction that the best digital experiences exist at the
                             intersection of precision engineering and timeless design. Building
-                            Vesper Labs to prove it.
+                            Vesper Works to prove it.
                         </p>
                     </motion.div>
                     <motion.div
@@ -107,7 +107,7 @@ export default function Team() {
                         </div>
                         <div className="team-card-inline-divider" />
                         <p className="team-card-inline-bio">
-                            Shaping the strategic vision at Vesper Labs. Passionate about engineering
+                            Shaping the strategic vision at Vesper Works. Passionate about engineering
                             products that redefine industry standards and building lasting digital
                             ecosystems.
                         </p>
