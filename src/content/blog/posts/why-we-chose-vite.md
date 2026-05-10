@@ -3,7 +3,7 @@ title: "Why We Chose Vite for Our Stack"
 slug: "why-we-chose-vite"
 publishedAt: 2026-04-08T00:00:00.000Z
 updatedAt: 2026-04-08T00:00:00.000Z
-author: "Vesper Labs Editorial Team"
+author: "Vesper Works Editorial Team"
 excerpt: "A deep dive into why Vite became the cornerstone of our frontend tooling and how it transforms our development workflow."
 coverImage:
   src: "/og-image.svg"
@@ -13,12 +13,12 @@ tags:
   - Frontend
   - Tooling
 seo:
-  metaTitle: "Why We Chose Vite for Our Stack | Vesper Labs"
+  metaTitle: "Why We Chose Vite for Our Stack | Vesper Works"
   metaDescription: "A deep dive into why Vite became the cornerstone of our frontend tooling and how it transforms our development workflow."
   ogImage: "/og-image.svg"
 ---
 
-When we started building the current generation of Vesper Labs projects, we needed a build tool that could keep up with our pace of iteration. After evaluating the landscape, **Vite** became the clear choice.
+When we started building the current generation of Vesper Works projects, we needed a build tool that could keep up with our pace of iteration. After evaluating the landscape, **Vite** became the clear choice.
 
 ## The Problem with Traditional Bundlers
 
@@ -70,4 +70,4 @@ The lesson here isn't about Vite specifically — it's about **choosing tools th
 
 ---
 
-*Have questions about our stack? [Get in touch](mailto:hello@vesperlabs.co).*
+*Have questions about our stack? [Get in touch](mailto:hello@vesperworks.co).*

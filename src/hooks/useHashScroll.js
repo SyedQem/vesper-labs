@@ -18,10 +18,11 @@ export default function useHashScroll(lenisAvailable) {
         if (!el) return;
 
         const run = () => {
+            const offsetAmount = id === 'blog' ? 45 : -OFFSET;
             if (lenisAvailable && lenis) {
-                lenis.scrollTo(el, { offset: -OFFSET });
+                lenis.scrollTo(el, { offset: offsetAmount });
             } else {
-                const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+                const top = el.getBoundingClientRect().top + window.scrollY + offsetAmount;
                 window.scrollTo({ top, behavior: 'auto' });
             }
         };

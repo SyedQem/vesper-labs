@@ -418,7 +418,9 @@ body.nav-open .mobile-nav-overlay {
     transform: translateX(-50%);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-link.section-active::after {
     width: 100%;
 }
 

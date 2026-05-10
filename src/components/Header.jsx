@@ -18,10 +18,11 @@ export default function Header({ lenisEnabled }) {
         (hash) => {
             const el = document.querySelector(hash);
             if (!el) return;
+            const offsetAmount = hash === '#blog' ? 45 : -HEADER_OFFSET;
             if (lenis) {
-                lenis.scrollTo(el, { offset: -HEADER_OFFSET });
+                lenis.scrollTo(el, { offset: offsetAmount });
             } else {
-                const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+                const top = el.getBoundingClientRect().top + window.scrollY + offsetAmount;
                 window.scrollTo({ top, behavior: 'auto' });
             }
         },
@@ -186,20 +187,22 @@ export default function Header({ lenisEnabled }) {
                                 >
                                     <span className="magnetic-inner">Projects</span>
                                 </a>
-                                <Link
-                                    to="/team"
+                                <a
+                                    href="#team"
                                     className="nav-link magnetic"
-                                    onClick={() => setNavOpen(false)}
+                                    data-section="team"
+                                    onClick={(e) => goHomeSection(e, '#team')}
                                 >
                                     <span className="magnetic-inner">Team</span>
-                                </Link>
-                                <Link
-                                    to="/blog"
+                                </a>
+                                <a
+                                    href="#blog"
                                     className="nav-link magnetic"
-                                    onClick={() => setNavOpen(false)}
+                                    data-section="blog"
+                                    onClick={(e) => goHomeSection(e, '#blog')}
                                 >
                                     <span className="magnetic-inner">Blog</span>
-                                </Link>
+                                </a>
                                 <a
                                     href="#contact"
                                     className="nav-link magnetic"
@@ -232,13 +235,17 @@ export default function Header({ lenisEnabled }) {
                                 >
                                     <span className="magnetic-inner">Projects</span>
                                 </Link>
-                                <Link to="/team" className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}>
+                                <Link
+                                    to="/#team"
+                                    className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}
+                                    onClick={(e) => goHomeSection(e, '#team')}
+                                >
                                     <span className="magnetic-inner">Team</span>
                                 </Link>
                                 <Link
-                                    to="/blog"
+                                    to="/#blog"
                                     className={`nav-link magnetic${isBlogRoute ? ' active' : ''}`}
-                                    onClick={() => setNavOpen(false)}
+                                    onClick={(e) => goHomeSection(e, '#blog')}
                                 >
                                     <span className="magnetic-inner">Blog</span>
                                 </Link>
@@ -301,20 +308,22 @@ export default function Header({ lenisEnabled }) {
                             >
                                 <span className="magnetic-inner">Projects</span>
                             </a>
-                            <Link
-                                to="/team"
+                            <a
+                                href="#team"
                                 className="nav-link magnetic"
-                                onClick={() => setNavOpen(false)}
+                                data-section="team"
+                                onClick={(e) => goHomeSection(e, '#team')}
                             >
                                 <span className="magnetic-inner">Team</span>
-                            </Link>
-                            <Link
-                                to="/blog"
+                            </a>
+                            <a
+                                href="#blog"
                                 className="nav-link magnetic"
-                                onClick={() => setNavOpen(false)}
+                                data-section="blog"
+                                onClick={(e) => goHomeSection(e, '#blog')}
                             >
                                 <span className="magnetic-inner">Blog</span>
-                            </Link>
+                            </a>
                             <a
                                 href="#contact"
                                 className="nav-link magnetic"
@@ -347,13 +356,17 @@ export default function Header({ lenisEnabled }) {
                             >
                                 <span className="magnetic-inner">Projects</span>
                             </Link>
-                            <Link to="/team" className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}>
+                            <Link
+                                to="/#team"
+                                className={`nav-link magnetic${isTeamRoute ? ' active' : ''}`}
+                                onClick={(e) => goHomeSection(e, '#team')}
+                            >
                                 <span className="magnetic-inner">Team</span>
                             </Link>
                             <Link
-                                to="/blog"
+                                to="/#blog"
                                 className={`nav-link magnetic${isBlogRoute ? ' active' : ''}`}
-                                onClick={() => setNavOpen(false)}
+                                onClick={(e) => goHomeSection(e, '#blog')}
                             >
                                 <span className="magnetic-inner">Blog</span>
                             </Link>

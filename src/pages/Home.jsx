@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, Link } from 'react-router-dom';
 import { useLenis } from 'lenis/react';
 import HeroCanvas from '../components/HeroCanvas.jsx';
 import useHashScroll from '../hooks/useHashScroll.js';
 import { easeOutExpo, fadeUpTransition } from '../motionConfig.js';
+import { getAllPosts } from '../content/blog/index.js';
 
 const SITE = 'https://vesper-labs.vercel.app';
 const HOME_META_DESCRIPTION =
@@ -31,8 +32,19 @@ export default function Home() {
     const lenis = useLenis();
     const heroRef = useRef(null);
     const [heroReady, setHeroReady] = useState(false);
+    const [posts, setPosts] = useState([]);
 
     useHashScroll(lenisEnabled);
+
+    useEffect(() => {
+        let mounted = true;
+        getAllPosts().then((entries) => {
+            if (mounted) {
+                setPosts(entries.slice(0, 3));
+            }
+        });
+        return () => { mounted = false; };
+    }, []);
 
     useEffect(() => {
         const delay = reducedMotion ? 0 : 1100;
@@ -323,11 +335,42 @@ export default function Home() {
                 </div>
             </section>
 
+            <section className="blog section" id="blog">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="label-text">05 // Insights</span>
+                        <motion.h2 className="section-title" {...fadeUp}>
+                            Blog
+                        </motion.h2>
+                    </div>
+
+                    <div className="blog-grid" role="list">
+                        {posts.map((post) => (
+                            <article className="blog-card" key={post.slug} role="listitem">
+                                <img src={post.coverImage.src} alt={post.coverImage.alt} loading="lazy" />
+                                <div className="blog-card-content">
+                                    <p className="blog-card-date">{new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                    <h2>
+                                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                                    </h2>
+                                    <p>{post.excerpt}</p>
+                                    <ul className="blog-tag-list" aria-label="Post topics">
+                                        {post.tags.map((tag) => (
+                                            <li key={tag}>{tag}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <section className="marquee section">
                 <div className="marquee-inner">
                     <span className="marquee-text">
-                        Vesper Labs &mdash; Engineering Tomorrow &mdash; Vesper Labs &mdash;
-                        Engineering Tomorrow &mdash; Vesper Labs &mdash; Engineering Tomorrow &mdash;{' '}
+                        Vesper Works &mdash; Engineering Tomorrow &mdash; Vesper Works &mdash;
+                        Engineering Tomorrow &mdash; Vesper Works &mdash; Engineering Tomorrow &mdash;{' '}
                     </span>
                 </div>
             </section>

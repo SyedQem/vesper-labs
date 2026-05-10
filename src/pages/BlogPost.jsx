@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -16,7 +16,13 @@ function formatDate(dateValue) {
 
 export default function BlogPost() {
     const { slug } = useParams();
+    const navigate = useNavigate();
     const [post, setPost] = useState(undefined);
+
+    const goBackToBlog = (e) => {
+        e.preventDefault();
+        navigate('/#blog');
+    };
 
     useEffect(() => {
         let mounted = true;
@@ -54,7 +60,7 @@ export default function BlogPost() {
                     />
                     <h1 id="missing-post-heading">Post not found</h1>
                     <p>The article you are looking for does not exist or has moved.</p>
-                    <Link to="/blog" className="btn">
+                    <Link to="/#blog" className="btn" onClick={goBackToBlog}>
                         Back to blog
                     </Link>
                 </div>
@@ -107,7 +113,7 @@ export default function BlogPost() {
                         </div>
 
                         <footer className="blog-post-footer">
-                            <Link to="/blog" className="btn">
+                            <Link to="/#blog" className="btn" onClick={goBackToBlog}>
                                 &larr; Back to blog
                             </Link>
                         </footer>
