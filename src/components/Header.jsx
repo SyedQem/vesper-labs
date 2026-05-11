@@ -259,7 +259,7 @@ export default function Header({ lenisEnabled }) {
                             </>
                         )}
                     </nav>
-                    <a href="mailto:hello@vesperlabs.co" className="nav-btn magnetic">
+                    <a href="mailto:johnstonearmando@gmail.com" className="nav-btn magnetic">
                         <span className="magnetic-inner">Let&apos;s Talk</span>
                     </a>
                     <button

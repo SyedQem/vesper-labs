@@ -10,13 +10,13 @@ import { getAllPosts } from '../content/blog/index.js';
 
 const SITE = 'https://vesper-labs.vercel.app';
 const HOME_META_DESCRIPTION =
-    'Vesper Labs — premium digital studio for engineering and design. Darwin is a peer marketplace for university students across Canada to buy, sell, and barter.';
+    'Vesper Works — premium digital studio for engineering and design. Darwin is a peer marketplace for university students across Canada to buy, sell, and barter.';
 const ORG_JSON = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Vesper Labs',
+    name: 'Vesper Works',
     url: `${SITE}/`,
-    email: 'hello@vesperlabs.co',
+    email: 'johnstonearmando@gmail.com',
     sameAs: ['https://x.com/VesperLabs_', 'https://www.instagram.com/vesperlabs_'],
 };
 
@@ -96,19 +96,19 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Vesper Labs | Engineering Tomorrow</title>
+                <title>Vesper Works | Engineering Tomorrow</title>
                 <meta name="description" content={HOME_META_DESCRIPTION} />
                 <link rel="canonical" href={`${SITE}/`} />
-                <meta property="og:title" content="Vesper Labs | Engineering Tomorrow" />
+                <meta property="og:title" content="Vesper Works | Engineering Tomorrow" />
                 <meta property="og:description" content={HOME_META_DESCRIPTION} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content={`${SITE}/`} />
                 <meta property="og:image" content={`${SITE}/og-image.svg`} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
-                <meta property="og:image:alt" content="Vesper Labs — Engineering Tomorrow" />
+                <meta property="og:image:alt" content="Vesper Works — Engineering Tomorrow" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Vesper Labs | Engineering Tomorrow" />
+                <meta name="twitter:title" content="Vesper Works | Engineering Tomorrow" />
                 <meta name="twitter:description" content={HOME_META_DESCRIPTION} />
                 <meta name="twitter:image" content={`${SITE}/og-image.svg`} />
                 <script type="application/ld+json">{JSON.stringify(ORG_JSON)}</script>
