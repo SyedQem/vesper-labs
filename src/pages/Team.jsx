@@ -10,7 +10,7 @@ const ORG_JSON = {
     '@type': 'Organization',
     name: 'Vesper Labs',
     url: `${SITE}/`,
-    email: 'hello@vesperlabs.co',
+    email: 'info@vesperworks.ca',
     sameAs: ['https://x.com/VesperLabs_', 'https://www.instagram.com/vesperlabs_'],
 };
 
