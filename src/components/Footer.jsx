@@ -18,7 +18,7 @@ export default function Footer() {
                     >
                         Have an idea?
                         <br />
-                        <a href="mailto:info@vesperworks.ca" className="contact-link magnetic">
+                        <a href="mailto:johnstonearmando@gmail.com" className="contact-link magnetic">
                             <span className="magnetic-inner">Start a project.</span>
                         </a>
                     </motion.h2>

@@ -8,7 +8,7 @@ import useHashScroll from '../hooks/useHashScroll.js';
 import { easeOutExpo, fadeUpTransition } from '../motionConfig.js';
 import { getAllPosts } from '../content/blog/index.js';
 
-const SITE = 'https://vesper-labs.vercel.app';
+const SITE = 'https://www.vesperworks.ca/';
 const HOME_META_DESCRIPTION =
     'Vesper Works — premium digital studio for engineering and design. Darwin is a peer marketplace for university students across Canada to buy, sell, and barter.';
 const ORG_JSON = {
@@ -16,8 +16,8 @@ const ORG_JSON = {
     '@type': 'Organization',
     name: 'Vesper Works',
     url: `${SITE}/`,
-    email: 'info@vesperworks.ca',
-    sameAs: ['https://x.com/VesperLabs_', 'https://www.instagram.com/vesperlabs_'],
+    email: 'johnstonearmando@gmail.com',
+    sameAs: ['https://x.com/VesperWorks_', 'https://www.instagram.com/vesperworks_'],
 };
 
 const heroLineTransition = (reducedMotion, delay) => ({
@@ -261,7 +261,7 @@ export default function Home() {
                                     and barter with a focused, trustworthy experience.
                                 </p>
                                 <a
-                                    href="https://darwinmarket.vercel.app"
+                                    href="https://www.darwinmarketplace.ca"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn secondary magnetic project-cta"

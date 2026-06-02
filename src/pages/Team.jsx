@@ -4,14 +4,14 @@ import { useOutletContext } from 'react-router-dom';
 import useHashScroll from '../hooks/useHashScroll.js';
 import { fadeUpTransition } from '../motionConfig.js';
 
-const SITE = 'https://vesper-labs.vercel.app';
+const SITE = 'https://vesper-Works.vercel.app';
 const ORG_JSON = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Vesper Labs',
+    name: 'Vesper Works',
     url: `${SITE}/`,
     email: 'info@vesperworks.ca',
-    sameAs: ['https://x.com/VesperLabs_', 'https://www.instagram.com/vesperlabs_'],
+    sameAs: ['https://x.com/VesperWorks_', 'https://www.instagram.com/vesperWorks_'],
 };
 
 export default function Team() {
@@ -29,28 +29,28 @@ export default function Team() {
     return (
         <>
             <Helmet>
-                <title>The Team | Vesper Labs</title>
+                <title>The Team | Vesper Works</title>
                 <meta
                     name="description"
-                    content="Meet the people behind Vesper Labs — engineers, designers, and builders shaping the future of digital experiences."
+                    content="Meet the people behind Vesper Works — engineers, designers, and builders shaping the future of digital experiences."
                 />
                 <link rel="canonical" href={`${SITE}/team`} />
-                <meta property="og:title" content="The Team | Vesper Labs" />
+                <meta property="og:title" content="The Team | Vesper Works" />
                 <meta
                     property="og:description"
-                    content="Meet the people behind Vesper Labs — engineers, designers, and builders shaping the future of digital experiences."
+                    content="Meet the people behind Vesper Works — engineers, designers, and builders shaping the future of digital experiences."
                 />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content={`${SITE}/team`} />
                 <meta property="og:image" content={`${SITE}/og-image.svg`} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
-                <meta property="og:image:alt" content="Vesper Labs — Engineering Tomorrow" />
+                <meta property="og:image:alt" content="Vesper Works — Engineering Tomorrow" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="The Team | Vesper Labs" />
+                <meta name="twitter:title" content="The Team | Vesper Works" />
                 <meta
                     name="twitter:description"
-                    content="Meet the people behind Vesper Labs — engineers, designers, and builders shaping the future of digital experiences."
+                    content="Meet the people behind Vesper Works — engineers, designers, and builders shaping the future of digital experiences."
                 />
                 <meta name="twitter:image" content={`${SITE}/og-image.svg`} />
                 <script type="application/ld+json">{JSON.stringify(ORG_JSON)}</script>

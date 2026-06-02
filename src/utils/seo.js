@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://vesper-labs.vercel.app';
+export const SITE_URL = 'https://www.vesperworks.ca/';
 export const DEFAULT_OG_IMAGE = '/og-image.svg';
 
 export function getAbsoluteUrl(path = '/') {
